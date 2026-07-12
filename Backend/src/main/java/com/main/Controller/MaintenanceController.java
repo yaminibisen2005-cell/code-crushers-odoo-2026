@@ -41,6 +41,14 @@ public class MaintenanceController {
         return maintenanceService.getMaintenanceById(id);
     }
 
+    @PutMapping("/{id}")
+    public Maintenance updateMaintenance(
+            @PathVariable Long id,
+            @RequestBody Maintenance maintenance) {
+
+        return maintenanceService.updateMaintenance(id, maintenance);
+    }
+
     @PatchMapping("/{id}/complete")
     public Maintenance completeMaintenance(
             @PathVariable Long id) {

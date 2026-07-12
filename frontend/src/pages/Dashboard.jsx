@@ -1,17 +1,19 @@
-import React from 'react';
-import { useApp } from '../context/AppContext';
-import { ROLES } from '../config/roles';
-import { FleetManagerDashboard } from './dashboard/FleetManagerDashboard';
-import { DispatcherDashboard } from './dashboard/DispatcherDashboard';
-import { SafetyOfficerDashboard } from './dashboard/SafetyOfficerDashboard';
-import { FinancialAnalystDashboard } from './dashboard/FinancialAnalystDashboard';
+import React from "react";
+import { useApp } from "../context/AppContext";
+import { normalizeRole, ROLES } from "../config/roles";
+import { FleetManagerDashboard } from "./dashboard/FleetManagerDashboard";
+import { DispatcherDashboard } from "./dashboard/DispatcherDashboard";
+import { SafetyOfficerDashboard } from "./dashboard/SafetyOfficerDashboard";
+import { FinancialAnalystDashboard } from "./dashboard/FinancialAnalystDashboard";
 
 export const Dashboard = () => {
   const { user } = useApp();
 
   // Render role-specific dashboard
   const renderDashboard = () => {
-    switch (user?.role) {
+    const normalizedRole = normalizeRole(user?.role);
+
+    switch (normalizedRole) {
       case ROLES.FLEET_MANAGER:
         return <FleetManagerDashboard />;
       case ROLES.DISPATCHER:
