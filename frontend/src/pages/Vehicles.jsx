@@ -250,7 +250,7 @@ export const Vehicles = () => {
       </div>
 
       {/* FILTER & SEARCH PANEL */}
-      <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs flex flex-wrap gap-4 items-center justify-between">
+      <div className="glass-card border border-slate-200/80 rounded-2xl p-5 shadow-premium flex flex-wrap gap-4 items-center justify-between">
         <SearchBar
           id="vehicle-search"
           value={searchQuery}
@@ -261,13 +261,13 @@ export const Vehicles = () => {
         <div className="flex flex-wrap gap-3">
           <div className="flex items-center gap-2">
             <Filter className="w-4 h-4 text-slate-400" />
-            <span className="text-xs font-semibold text-slate-500">Filter By:</span>
+            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Filter By:</span>
           </div>
 
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold rounded-xl px-3 py-2 cursor-pointer focus:outline-none"
+            className="bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-xl px-4 py-2.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all duration-300 hover:border-slate-300 hover:shadow-md"
           >
             <option value="All">Type: All</option>
             <option value="Heavy Truck">Heavy Truck</option>
@@ -279,7 +279,7 @@ export const Vehicles = () => {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-slate-50 border border-slate-200 text-slate-700 text-xs font-semibold rounded-xl px-3 py-2 cursor-pointer focus:outline-none"
+            className="bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-xl px-4 py-2.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all duration-300 hover:border-slate-300 hover:shadow-md"
           >
             <option value="All">Status: All</option>
             <option value="Available">Available</option>
@@ -301,10 +301,10 @@ export const Vehicles = () => {
           onActionClick={handleOpenAdd}
         />
       ) : (
-        <div className="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+        <div className="glass-card border border-slate-200/80 rounded-2xl shadow-premium overflow-hidden flex flex-col animate-slide-up">
           <div className="overflow-x-auto w-full">
             <table className="w-full text-left text-sm text-slate-700">
-              <thead className="bg-slate-50 border-b border-slate-100 text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <thead className="bg-gradient-to-r from-slate-50 to-blue-50/30 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider">
                 <tr>
                   <th className="px-6 py-4">Reg No</th>
                   <th className="px-6 py-4">Vehicle Model</th>
@@ -318,10 +318,14 @@ export const Vehicles = () => {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {paginatedVehicles.map((vehicle) => (
-                  <tr key={vehicle.id} className="hover:bg-slate-50/40 transition-colors">
+                  <tr key={vehicle.id} className="hover:bg-gradient-to-r hover:from-blue-50/30 hover:to-violet-50/30 transition-all duration-300 group">
                     <td className="px-6 py-4 font-bold text-slate-800 tracking-tight">{vehicle.registrationNo}</td>
                     <td className="px-6 py-4 font-semibold text-slate-800">{vehicle.name}</td>
-                    <td className="px-6 py-4 font-medium text-slate-500">{vehicle.type}</td>
+                    <td className="px-6 py-4">
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 text-xs font-medium border border-slate-200">
+                        {vehicle.type}
+                      </span>
+                    </td>
                     <td className="px-6 py-4 font-medium text-slate-500">{vehicle.capacity}</td>
                     <td className="px-6 py-4 font-medium text-slate-500">{vehicle.odometer.toLocaleString()} km</td>
                     <td className="px-6 py-4 font-semibold text-slate-900">${vehicle.cost.toLocaleString()}</td>
@@ -332,21 +336,21 @@ export const Vehicles = () => {
                       <div className="inline-flex gap-1">
                         <button
                           onClick={() => handleOpenDetail(vehicle)}
-                          className="p-1.5 hover:bg-slate-100 text-slate-500 hover:text-slate-800 rounded-lg cursor-pointer transition-colors"
+                          className="p-2 hover:bg-blue-50 text-slate-500 hover:text-blue-600 rounded-xl cursor-pointer transition-all duration-300 hover:shadow-md group-hover:scale-105"
                           title="View Details"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleOpenEdit(vehicle)}
-                          className="p-1.5 hover:bg-slate-100 text-slate-500 hover:text-blue-600 rounded-lg cursor-pointer transition-colors"
+                          className="p-2 hover:bg-violet-50 text-slate-500 hover:text-violet-600 rounded-xl cursor-pointer transition-all duration-300 hover:shadow-md group-hover:scale-105"
                           title="Modify Record"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleOpenDelete(vehicle)}
-                          className="p-1.5 hover:bg-slate-100 text-slate-500 hover:text-red-600 rounded-lg cursor-pointer transition-colors"
+                          className="p-2 hover:bg-rose-50 text-slate-500 hover:text-rose-600 rounded-xl cursor-pointer transition-all duration-300 hover:shadow-md group-hover:scale-105"
                           title="Decommission Asset"
                           disabled={vehicle.status === 'On Trip'}
                         >

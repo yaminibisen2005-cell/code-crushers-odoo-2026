@@ -12,14 +12,14 @@ export const Button = ({
   className = '',
   icon: Icon
 }) => {
-  const baseStyle = "inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] cursor-pointer";
+  const baseStyle = "inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.97] cursor-pointer hover:shadow-lg";
   
   const variants = {
-    primary: "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500 shadow-sm",
-    secondary: "bg-slate-100 hover:bg-slate-200 text-slate-800 focus:ring-slate-300",
-    outline: "border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 focus:ring-slate-400",
-    danger: "bg-red-600 hover:bg-red-700 text-white focus:ring-red-500 shadow-sm",
-    success: "bg-emerald-600 hover:bg-emerald-700 text-white focus:ring-emerald-500 shadow-sm",
+    primary: "gradient-primary text-white focus:ring-blue-500 shadow-md hover:shadow-premium",
+    secondary: "bg-slate-100 hover:bg-slate-200 text-slate-800 focus:ring-slate-300 border border-slate-200",
+    outline: "border-2 border-slate-300 bg-white hover:bg-slate-50 text-slate-700 focus:ring-slate-400 hover:border-blue-300",
+    danger: "bg-gradient-to-r from-rose-500 to-rose-600 text-white focus:ring-rose-500 shadow-md hover:shadow-premium",
+    success: "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white focus:ring-emerald-500 shadow-md hover:shadow-premium",
   };
 
   const sizes = {

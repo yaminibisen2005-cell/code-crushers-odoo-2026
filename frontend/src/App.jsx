@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider, useApp } from './context/AppContext';
 import { DashboardLayout } from './layouts/DashboardLayout';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { SplashScreen } from './components/SplashScreen';
 
 // Pages
 import { Login } from './pages/Login';
@@ -27,8 +28,14 @@ const AuthGuard = ({ children }) => {
 };
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
   return (
     <AppProvider>
+      <SplashScreen 
+        duration={2500} 
+        onComplete={() => setShowSplash(false)} 
+      />
       <BrowserRouter>
         <Routes>
           {/* Public Routes */}
