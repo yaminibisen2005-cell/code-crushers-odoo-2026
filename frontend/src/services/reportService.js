@@ -1,8 +1,7 @@
-import api from './api';
+import { analyticsService } from "./analyticsService";
 
 export const reportService = {
   getReportData: async () => {
-    const response = await api.get('/api/reports');
-    return response.data;
-  }
+    return analyticsService.getAnalytics();
+  },
 };

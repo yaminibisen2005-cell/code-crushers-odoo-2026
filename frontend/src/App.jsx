@@ -22,7 +22,7 @@ import { AccessDenied } from './pages/AccessDenied';
 
 // Authentication Guard Component
 const AuthGuard = ({ children }) => {
-  const { user } = useApp();
+  const { user } = useApp() ?? {};
   if (!user) {
     return <Navigate to="/login" replace />;
   }
@@ -54,89 +54,96 @@ const AppContent = () => {
           <Route path="/access-denied" element={<AccessDenied />} />
 
           {/* Protected Dashboard Panel Routes with Role-Based Access */}
-          <Route 
-            path="/" 
+          <Route
+            path="/"
             element={
               <AuthGuard>
                 <ProtectedRoute requiredPage="dashboard">
                   <Dashboard />
                 </ProtectedRoute>
               </AuthGuard>
-            } 
+            }
           />
-          <Route 
-            path="/vehicles" 
+          <Route
+            path="/vehicles"
             element={
               <AuthGuard>
                 <ProtectedRoute requiredPage="vehicles">
                   <Vehicles />
                 </ProtectedRoute>
               </AuthGuard>
-            } 
+            }
           />
-          <Route 
-            path="/drivers" 
+          <Route
+            path="/drivers"
             element={
               <AuthGuard>
                 <ProtectedRoute requiredPage="drivers">
                   <Drivers />
                 </ProtectedRoute>
               </AuthGuard>
-            } 
+            }
           />
-          <Route 
-            path="/trips" 
+          <Route
+            path="/trips"
             element={
               <AuthGuard>
                 <ProtectedRoute requiredPage="trips">
                   <Trips />
                 </ProtectedRoute>
               </AuthGuard>
-            } 
+            }
           />
-          <Route 
-            path="/maintenance" 
+          <Route
+            path="/maintenance"
             element={
               <AuthGuard>
                 <ProtectedRoute requiredPage="maintenance">
                   <Maintenance />
                 </ProtectedRoute>
               </AuthGuard>
-            } 
+            }
           />
-          <Route 
-            path="/fuel" 
+          <Route
+            path="/fuel"
             element={
               <AuthGuard>
                 <ProtectedRoute requiredPage="fuel">
                   <FuelExpense />
                 </ProtectedRoute>
               </AuthGuard>
-            } 
+            }
           />
-          <Route 
-            path="/reports" 
+          <Route
+            path="/reports"
             element={
               <AuthGuard>
                 <ProtectedRoute requiredPage="reports">
                   <Reports />
                 </ProtectedRoute>
               </AuthGuard>
-            } 
+            }
           />
-          <Route 
-            path="/settings" 
+          <Route
+            path="/settings"
             element={
               <AuthGuard>
                 <ProtectedRoute requiredPage="settings">
                   <Settings />
                 </ProtectedRoute>
               </AuthGuard>
-            } 
+            }
           />
 
           {/* Fallback 404 Route */}
-          <Route path="*" element={<AuthGuard><NotFound /></AuthGuard>} />
+          <Route
+            path="*"
+            element={
+              <AuthGuard>
+                <NotFound />
+              </AuthGuard>
+            }
+          />
         </Routes>
       )}
     </>

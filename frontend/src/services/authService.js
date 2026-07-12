@@ -81,10 +81,19 @@ export const authService = {
     
     // If no local user matches, try the actual API (for future Spring Boot integration)
     try {
-      const response = await api.post('/api/auth/login', { email, password });
-      return response.data;
+      const response = await api.post("/api/auth/login", {
+        email,
+        password,
+      });
+
+      const data = response.data;
+
+      return {
+        token: data.token,
+        user: data.user,
+      };
     } catch (error) {
-      throw new Error('Invalid credentials');
+      throw new Error(error.response?.data?.message || "Invalid credentials");
     }
   },
   

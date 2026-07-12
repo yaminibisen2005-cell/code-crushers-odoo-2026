@@ -19,14 +19,24 @@ export const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email.trim() || !password.trim()) {
+      showError("Email and password are required");
+      return;
+    }
+
     setLoading(true);
+
     try {
-      const data = await authService.login(email, password);
+      const data = await authService.login(email.trim(), password);
+
       login(data);
-      navigate('/');
-    } catch (err) {
-      const msg = err.response?.data?.message || 'Login failed';
-      showError(msg);
+
+      showSuccess("Login successful");
+
+      navigate("/");
+    } catch (error) {
+      showError(error.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -242,7 +252,7 @@ export const Login = () => {
                 />
                 Remember this device
               </label>
-              
+
               <button
                 type="button"
                 onClick={() => showError('Password reset is managed by System Administration.')}
