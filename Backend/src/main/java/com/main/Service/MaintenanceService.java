@@ -48,7 +48,12 @@ public class MaintenanceService {
         }
 
         maintenance.setVehicle(vehicle);
-        maintenance.setStatus(MaintenanceStatus.ACTIVE);
+        if (maintenance.getIssue() == null || maintenance.getIssue().isBlank()) {
+            maintenance.setIssue("Maintenance service");
+        }
+        if (maintenance.getStatus() == null) {
+            maintenance.setStatus(MaintenanceStatus.ACTIVE);
+        }
 
         if (maintenance.getDate() == null) {
             maintenance.setDate(LocalDate.now());
@@ -59,6 +64,26 @@ public class MaintenanceService {
         vehicleRepository.save(vehicle);
 
         return maintenanceRepository.save(maintenance);
+    }
+
+    @Transactional
+    public Maintenance updateMaintenance(Long id, Maintenance maintenance) {
+        Maintenance existingMaintenance = getMaintenanceById(id);
+
+        if (maintenance.getIssue() != null && !maintenance.getIssue().isBlank()) {
+            existingMaintenance.setIssue(maintenance.getIssue());
+        }
+        if (maintenance.getCost() != null) {
+            existingMaintenance.setCost(maintenance.getCost());
+        }
+        if (maintenance.getDate() != null) {
+            existingMaintenance.setDate(maintenance.getDate());
+        }
+        if (maintenance.getStatus() != null) {
+            existingMaintenance.setStatus(maintenance.getStatus());
+        }
+
+        return maintenanceRepository.save(existingMaintenance);
     }
 
     public List<Maintenance> getAllMaintenance() {

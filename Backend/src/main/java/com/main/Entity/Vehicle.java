@@ -32,7 +32,18 @@ public class Vehicle {
     @Column(nullable = false)
     private Double odometer;
 
+    @Column(nullable = false)
+    private Double cost = 0.0;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private VehicleStatus status;
+
+    public String getRegistrationNo() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNo(String registrationNo) {
+        this.registrationNumber = registrationNo;
+    }
 }
