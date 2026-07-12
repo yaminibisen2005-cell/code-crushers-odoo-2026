@@ -13,7 +13,7 @@ export const NotFound = () => {
       </div>
       <h2 className="text-3xl font-black text-slate-800 tracking-tight mb-2">404 - Page Not Found</h2>
       <p className="text-slate-500 text-sm max-w-md mb-6 leading-relaxed">
-        The logistical route or operational dashboard panel you are trying to view does not exist in the VTrackora directory.
+        The logistical route or operational dashboard panel you are trying to view does not exist in the TransitOps directory.
       </p>
       <Button onClick={() => navigate('/')} variant="primary" icon={Home}>
         Return to Dashboard

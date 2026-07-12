@@ -66,7 +66,7 @@ export const FleetManagerDashboard = () => {
   }
 
   const { kpis, utilizationTrend, operationalCosts, fuelEfficiency } = dashboardData || {};
-  const COLORS = ['#0F6FFF', '#27D7FF', '#22C55E', '#F59E0B'];
+  const COLORS = ['#3b82f6', '#f59e0b', '#10b981', '#ef4444'];
 
   return (
     <div className="flex flex-col gap-8 animate-fade-in">
@@ -112,17 +112,17 @@ export const FleetManagerDashboard = () => {
         >
           <ResponsiveContainer width="100%" height={240}>
             <LineChart data={utilizationTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5EEF8" />
-              <XAxis dataKey="name" stroke="#64748B" fontSize={11} tickLine={false} />
-              <YAxis stroke="#64748B" fontSize={11} tickLine={false} domain={[0, 100]} />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+              <XAxis dataKey="name" stroke="#94a3b8" fontSize={11} tickLine={false} />
+              <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} domain={[0, 100]} />
               <Tooltip
-                contentStyle={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #E5EEF8', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
-                labelStyle={{ fontWeight: 'bold', color: '#12263F' }}
+                contentStyle={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
+                labelStyle={{ fontWeight: 'bold', color: '#1e293b' }}
               />
               <Line
                 type="monotone"
                 dataKey="utilization"
-                stroke="#0F6FFF"
+                stroke="#3b82f6"
                 strokeWidth={3}
                 dot={{ r: 4, strokeWidth: 2, fill: '#fff' }}
                 activeDot={{ r: 6 }}

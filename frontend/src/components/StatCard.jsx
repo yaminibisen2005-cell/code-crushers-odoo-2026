@@ -11,49 +11,49 @@ export const StatCard = ({
   id
 }) => {
   const colors = {
-    blue: "bg-[#0F6FFF]/10 border-[#0F6FFF]/30 text-[#0F6FFF]",
-    green: "bg-[#22C55E]/10 border-[#22C55E]/30 text-[#22C55E]",
-    amber: "bg-[#F59E0B]/10 border-[#F59E0B]/30 text-[#F59E0B]",
-    red: "bg-[#EF4444]/10 border-[#EF4444]/30 text-[#EF4444]",
+    blue: "bg-blue-50 border-blue-100 text-blue-600",
+    green: "bg-emerald-50 border-emerald-100 text-emerald-600",
+    amber: "bg-amber-50 border-amber-100 text-amber-600",
+    red: "bg-red-50 border-red-100 text-red-600",
     slate: "bg-slate-50 border-slate-100 text-slate-600",
   };
 
   const ringColors = {
-    blue: "border-[#E5EEF8] focus-within:ring-[#0F6FFF]/20",
-    green: "border-[#E5EEF8] focus-within:ring-[#22C55E]/20",
-    amber: "border-[#E5EEF8] focus-within:ring-[#F59E0B]/20",
-    red: "border-[#E5EEF8] focus-within:ring-[#EF4444]/20",
-    slate: "border-[#E5EEF8] focus-within:ring-slate-100",
+    blue: "border-blue-50 focus-within:ring-blue-100",
+    green: "border-emerald-50 focus-within:ring-emerald-100",
+    amber: "border-amber-50 focus-within:ring-amber-100",
+    red: "border-red-50 focus-within:ring-red-100",
+    slate: "border-slate-50 focus-within:ring-slate-100",
   };
 
   return (
     <div
       id={id}
       onClick={onClick}
-      className={`bg-white border border-[#E5EEF8] rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-between group ${
+      className={`bg-white border rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between group ${
         onClick ? 'cursor-pointer active:scale-98' : ''
       }`}
     >
       <div className="flex flex-col gap-1.5">
-        <span className="text-xs font-semibold uppercase tracking-wider text-[#64748B] group-hover:text-[#12263F] transition-colors">
+        <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 group-hover:text-slate-500 transition-colors">
           {title}
         </span>
-        <span className="text-3xl font-bold text-[#12263F] tracking-tight">
+        <span className="text-3xl font-bold text-slate-900 tracking-tight">
           {value}
         </span>
         {subtitle && (
-          <span className="text-xs text-[#64748B]">
+          <span className="text-xs text-slate-500">
             {subtitle}
           </span>
         )}
         {trend && (
           <div className="flex items-center gap-1.5 mt-0.5">
             <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold ${
-              trend.type === 'up' ? 'bg-[#22C55E]/10 text-[#22C55E]' : 'bg-[#EF4444]/10 text-[#EF4444]'
+              trend.type === 'up' ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-700'
             }`}>
               {trend.type === 'up' ? '▲' : '▼'} {trend.text}
             </span>
-            <span className="text-[10px] text-[#64748B]">vs last week</span>
+            <span className="text-[10px] text-slate-400">vs last week</span>
           </div>
         )}
       </div>

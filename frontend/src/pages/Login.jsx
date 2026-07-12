@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useApp } from '../context/AppContext';
-import { authService } from '../services/authService';
-import { ROLES, ROLE_DISPLAY_NAMES } from '../config/roles';
-import { Input } from '../components/Input';
-import { Button } from '../components/Button';
-import { KeyRound, Mail, ChevronDown, MapPin, Truck, Package, Route, Fuel, Check, Sparkles, Map, Shield, BarChart3 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useApp } from "../context/AppContext";
+import { authService } from "../services/authService";
+import { Input } from "../components/Input";
+import { Button } from "../components/Button";
+import { KeyRound, Mail, Sparkles, Navigation, Layers } from "lucide-react";
 
 export const Login = () => {
   const { login, showError, showSuccess } = useApp();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('admin@vtrackora.com');
-  const [password, setPassword] = useState('admin123');
-  const [selectedRole, setSelectedRole] = useState('');
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -42,191 +40,117 @@ export const Login = () => {
     }
   };
 
-  const handleRoleChange = (role) => {
-    setSelectedRole(role);
-    fillDemoCredentials(role);
-  };
-  const fillDemoCredentials = (role) => {
-    const credentials = {
-      [ROLES.FLEET_MANAGER]: { email: 'admin@vtrackora.com', password: 'admin123' },
-      [ROLES.DISPATCHER]: { email: 'dispatcher@vtrackora.com', password: 'dispatcher123' },
-      [ROLES.SAFETY_OFFICER]: { email: 'safety@vtrackora.com', password: 'safety123' },
-      [ROLES.FINANCIAL_ANALYST]: { email: 'finance@vtrackora.com', password: 'finance123' }
-    };
-    
-    const creds = credentials[role];
-    if (creds) {
-      setEmail(creds.email);
-      setPassword(creds.password);
-    }
-  };
-
   return (
-    <div className="flex flex-col md:flex-row w-full min-h-screen bg-slate-50 font-sans overflow-hidden">
-      
-      {/* LEFT PANEL: Hero Section with Background Image */}
-      <div className="md:w-1/2 relative overflow-hidden border-b md:border-b-0 md:border-r border-slate-800 min-h-[300px] md:min-h-screen">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url("/assets/login background/background screen.png")' }}
-        />
-        
-        {/* Dark Navy Overlay */}
-        <div className="absolute inset-0 bg-[#081B33]/70" />
-        
-        {/* Blue → Aqua Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0F6FFF]/20 via-transparent to-[#27D7FF]/20" />
-        
-        {/* Subtle Grid Pattern Overlay */}
-        <div 
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
-        
-        {/* Floating Glowing Particles */}
-        <motion.div 
-          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[20%] left-[15%] w-32 h-32 bg-[#0F6FFF]/20 rounded-full blur-3xl pointer-events-none"
-        />
-        <motion.div 
-          animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.3, 1] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-[30%] right-[20%] w-40 h-40 bg-[#27D7FF]/20 rounded-full blur-3xl pointer-events-none"
-        />
+    <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row overflow-hidden font-sans">
+      {/* LEFT PANEL */}
 
-        {/* Content Container */}
-        <div className="relative z-10 h-full flex flex-col p-8 md:p-12">
-          {/* Brand Header */}
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3"
-          >
-            <img src="/assets/logo/vtrackora-logo.png" alt="VTrackora" className="w-12 h-12 md:w-16 md:h-16 object-contain" />
-            <div className="flex flex-col">
-              <span className="font-bold text-white tracking-wide text-sm md:text-lg leading-none">VTrackora</span>
-              <span className="text-[10px] md:text-xs text-white/60 font-semibold uppercase tracking-widest mt-0.5 md:mt-1">Track • Monitor • Deliver</span>
-            </div>
-          </motion.div>
+      <div className="hidden md:flex md:w-1/2 bg-slate-900 text-slate-300 p-12 flex-col justify-between relative overflow-hidden border-r border-slate-800">
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-          {/* Hero Content */}
-          <div className="flex-1 flex flex-col justify-center max-w-lg">
-            {/* Glowing Badge */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-[10px] md:text-xs font-semibold self-start mb-8"
-            >
-              <Truck className="w-3 h-3 md:w-4 md:h-4 text-[#27D7FF]" />
-              <span className="text-white"> Next Gen Fleet Platform</span>
-            </motion.div>
-            
-            {/* Heading */}
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight mb-6"
-            >
-              Smart{' '}
-              <span className="bg-gradient-to-r from-[#0F6FFF] via-[#27D7FF] to-[#A8F542] bg-clip-text text-transparent">
-                Fleet
-              </span>
-              <br />
-              Management
-            </motion.h2>
-            
-            {/* Description */}
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-sm md:text-base text-white/70 leading-relaxed max-w-md"
-            >
-              Manage vehicles, drivers and trips from one intelligent platform.
-            </motion.p>
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-600/5 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none" />
+
+        {/* BRAND */}
+
+        <div className="flex items-center gap-3 z-10">
+          <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-lg ring-4 ring-blue-500/10">
+            T
           </div>
 
-          {/* Floating Dashboard Preview Card */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            whileHover={{ y: -4 }}
-            className="self-end p-5 md:p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl max-w-[280px] md:max-w-xs"
-          >
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-white/60">Fleet Online</span>
-                <span className="text-sm font-bold text-white">98%</span>
+          <div className="flex flex-col">
+            <span className="font-bold text-white tracking-wide text-lg leading-none">
+              TransitOps
+            </span>
+
+            <span className="text-xs text-slate-500 font-semibold uppercase tracking-widest mt-1">
+              SaaS Fleet Engine
+            </span>
+          </div>
+        </div>
+
+        {/* CONTENT */}
+
+        <div className="my-auto max-w-lg z-10 flex flex-col gap-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs font-semibold self-start">
+            <Sparkles className="w-3.5 h-3.5" />
+            Next Gen Fleet Management
+          </div>
+
+          <h2 className="text-4xl font-extrabold text-white tracking-tight leading-tight">
+            Smart Transport Operations, Simplified.
+          </h2>
+
+          <p className="text-slate-400 text-sm leading-relaxed">
+            Consolidate and monitor logistics, dispatch routes, driver safety
+            profiles, maintenance schedules and operational costs through one
+            powerful fleet dashboard.
+          </p>
+
+          <div className="grid grid-cols-1 gap-4 mt-4">
+            <div className="flex items-start gap-3.5">
+              <div className="p-2 bg-slate-800/80 rounded-xl border border-slate-700/50 text-blue-400">
+                <Navigation className="w-4.5 h-4.5" />
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-white/60">Active Vehicles</span>
-                <span className="text-sm font-bold text-white">250+</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-white/60">Live Trips</span>
-                <span className="text-sm font-bold text-white">32</span>
-              </div>
-              <div className="flex items-center justify-between pt-3 border-t border-white/20">
-                <span className="text-xs text-white/60">Status</span>
-                <span className="text-xs font-bold text-[#22C55E]">Operational</span>
+
+              <div>
+                <h4 className="text-sm font-semibold text-white">
+                  Advanced Route Dispatching
+                </h4>
+
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Manage routes, vehicles and driver assignments with
+                  operational validation.
+                </p>
               </div>
             </div>
-          </motion.div>
+
+            <div className="flex items-start gap-3.5">
+              <div className="p-2 bg-slate-800/80 rounded-xl border border-slate-700/50 text-blue-400">
+                <Layers className="w-4.5 h-4.5" />
+              </div>
+
+              <div>
+                <h4 className="text-sm font-semibold text-white">
+                  Fleet Cost Analytics
+                </h4>
+
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Track fuel, maintenance and fleet operational expenses.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* FOOTER */}
+
+        <div className="text-xs text-slate-500 z-10 flex items-center justify-between border-t border-slate-800 pt-6">
+          <span>TransitOps Dashboard Platform</span>
+          <span>© 2026 TransitOps</span>
         </div>
       </div>
 
-      {/* RIGHT PANEL: Login Card */}
-      <div className="flex-1 flex items-center justify-center p-4 md:p-6 lg:p-12 relative bg-[#F7FAFC]">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md bg-white/80 backdrop-blur-sm border border-[#E5EEF8] rounded-2xl shadow-lg p-6 md:p-8 lg:p-10 flex flex-col gap-4 md:gap-6"
-        >
+      {/* RIGHT PANEL */}
+
+      <div className="flex-1 flex items-center justify-center p-6 md:p-12 relative">
+        <div className="w-full max-w-md bg-white border border-slate-200/80 rounded-3xl shadow-xl p-8 md:p-10 flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <h3 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Welcome to VTrackora</h3>
-            <p className="text-xs md:text-sm text-slate-500">Sign in to manage your active transport fleet.</p>
+            <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+              Welcome to TransitOps
+            </h3>
+
+            <p className="text-sm text-slate-500">
+              Sign in to manage your transport fleet.
+            </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-5">
-            {/* Role Selection Dropdown */}
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-semibold text-[#12263F] uppercase tracking-wider">Login As</label>
-              <div className="relative">
-                <select
-                  value={selectedRole}
-                  onChange={(e) => handleRoleChange(e.target.value)}
-                  className="w-full px-4 py-3 bg-white border border-[#E5EEF8] rounded-xl text-sm text-[#12263F] font-medium appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0F6FFF]/20 focus:border-[#0F6FFF] transition-all"
-                >
-                  <option value="">Select a role...</option>
-                  <option value={ROLES.FLEET_MANAGER}>{ROLE_DISPLAY_NAMES[ROLES.FLEET_MANAGER]}</option>
-                  <option value={ROLES.DISPATCHER}>{ROLE_DISPLAY_NAMES[ROLES.DISPATCHER]}</option>
-                  <option value={ROLES.SAFETY_OFFICER}>{ROLE_DISPLAY_NAMES[ROLES.SAFETY_OFFICER]}</option>
-                  <option value={ROLES.FINANCIAL_ANALYST}>{ROLE_DISPLAY_NAMES[ROLES.FINANCIAL_ANALYST]}</option>
-                </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B] pointer-events-none" />
-              </div>
-              <p className="text-[10px] text-[#64748B]">Select a role to auto-fill demo credentials.</p>
-            </div>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <Input
               id="login-email"
               label="Operational Email Address"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="e.g. manager@vtrackora.com"
+              placeholder="manager@transitops.com"
               icon={Mail}
               required
             />
@@ -243,20 +167,24 @@ export const Login = () => {
             />
 
             <div className="flex items-center justify-between text-xs">
-              <label className="flex items-center gap-2 font-medium text-[#64748B] cursor-pointer select-none">
+              <label className="flex items-center gap-2 font-medium text-slate-600 cursor-pointer select-none">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="rounded text-[#0F6FFF] focus:ring-[#0F6FFF]/20 border-[#E5EEF8] w-4 h-4"
+                  className="rounded text-blue-600 focus:ring-blue-500 border-slate-300 w-4 h-4"
                 />
                 Remember this device
               </label>
 
               <button
                 type="button"
-                onClick={() => showError('Password reset is managed by System Administration.')}
-                className="font-semibold text-[#0F6FFF] hover:text-[#0A4DB8] cursor-pointer hover:underline"
+                onClick={() =>
+                  showError(
+                    "Password reset is managed by System Administration.",
+                  )
+                }
+                className="font-semibold text-blue-600 hover:text-blue-700 cursor-pointer hover:underline"
               >
                 Forgot Password?
               </button>
@@ -265,25 +193,19 @@ export const Login = () => {
             <Button
               type="submit"
               variant="primary"
-              className="w-full py-2.5 md:py-3 rounded-xl shadow-lg text-xs md:text-sm font-bold"
+              className="w-full py-2.5 rounded-xl shadow-md text-sm font-bold"
               isLoading={loading}
             >
               Sign In to Dashboard
             </Button>
           </form>
 
-          {/* Register Link */}
-          <div className="text-center text-xs md:text-sm">
-            <span className="text-[#64748B]">Don't have an account? </span>
-            <button
-              type="button"
-              onClick={() => navigate('/register')}
-              className="font-semibold text-[#0F6FFF] hover:text-[#0A4DB8] cursor-pointer hover:underline"
-            >
-              Create Account
-            </button>
+          <div className="text-center border-t border-slate-200 pt-5">
+            <p className="text-xs text-slate-500">
+              Secure access powered by TransitOps Authentication
+            </p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

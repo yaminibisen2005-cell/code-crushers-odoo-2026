@@ -72,7 +72,7 @@ export const Reports = () => {
   }
 
   const { summary, charts } = reportData || {};
-  const PIE_COLORS = ['#0F6FFF', '#22C55E', '#F59E0B'];
+  const PIE_COLORS = ['#3b82f6', '#10b981', '#f59e0b'];
 
   return (
     <div className="flex flex-col gap-6 animate-fade-in">
@@ -144,19 +144,19 @@ export const Reports = () => {
           >
             <ResponsiveContainer width="100%" height={280}>
               <LineChart data={charts.monthlyCosts} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5EEF8" />
-                <XAxis dataKey="name" stroke="#64748B" fontSize={11} tickLine={false} />
-                <YAxis stroke="#64748B" fontSize={11} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                <XAxis dataKey="name" stroke="#94a3b8" fontSize={11} tickLine={false} />
+                <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} />
                 <Tooltip
                   formatter={(value) => [`$${Number(value).toLocaleString()}`, '']}
-                  contentStyle={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #E5EEF8' }}
+                  contentStyle={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0' }}
                 />
                 <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '11px' }} />
                 <Line
                   type="monotone"
                   name="Fuel Fillings"
                   dataKey="fuel"
-                  stroke="#0F6FFF"
+                  stroke="#3b82f6"
                   strokeWidth={3}
                   dot={{ r: 4 }}
                   activeDot={{ r: 6 }}
@@ -165,7 +165,7 @@ export const Reports = () => {
                   type="monotone"
                   name="Workshop Maintenance"
                   dataKey="maint"
-                  stroke="#F59E0B"
+                  stroke="#f59e0b"
                   strokeWidth={3}
                   dot={{ r: 4 }}
                   activeDot={{ r: 6 }}
@@ -198,7 +198,7 @@ export const Reports = () => {
                 </Pie>
                 <Tooltip
                   formatter={(value) => `$${Number(value).toLocaleString()}`}
-                  contentStyle={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #E5EEF8' }}
+                  contentStyle={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0' }}
                 />
                 <Legend verticalAlign="bottom" height={36} iconType="circle" wrapperStyle={{ fontSize: '11px' }} />
               </PieChart>
@@ -214,16 +214,16 @@ export const Reports = () => {
           >
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={charts.efficiencyTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5EEF8" />
-                <XAxis dataKey="name" stroke="#64748B" fontSize={11} tickLine={false} />
-                <YAxis stroke="#64748B" fontSize={11} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                <XAxis dataKey="name" stroke="#94a3b8" fontSize={11} tickLine={false} />
+                <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} />
                 <Tooltip
                   formatter={(value) => [`${value} km/L`, 'Efficiency']}
-                  contentStyle={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #E5EEF8' }}
+                  contentStyle={{ backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0' }}
                 />
-                <Bar dataKey="efficiency" fill="#0F6FFF" radius={[4, 4, 0, 0]} barSize={40}>
+                <Bar dataKey="efficiency" fill="#3b82f6" radius={[4, 4, 0, 0]} barSize={40}>
                   {charts.efficiencyTrend.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.efficiency >= 10 ? '#22C55E' : '#0F6FFF'} />
+                    <Cell key={`cell-${index}`} fill={entry.efficiency >= 10 ? '#10b981' : '#3b82f6'} />
                   ))}
                 </Bar>
               </BarChart>
