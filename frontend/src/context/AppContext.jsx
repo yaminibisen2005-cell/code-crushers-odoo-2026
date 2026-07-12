@@ -5,7 +5,7 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem('transitops_user');
+    const savedUser = localStorage.getItem('vtrackora_user');
     return savedUser ? JSON.parse(savedUser) : null;
   });
   
@@ -50,16 +50,16 @@ export const AppProvider = ({ children }) => {
 
   const handleLogin = (userData) => {
     setUser(userData.user);
-    localStorage.setItem('transitops_user', JSON.stringify(userData.user));
-    localStorage.setItem('transitops_token', userData.token);
-    localStorage.setItem('transitops_role', userData.user.role);
+    localStorage.setItem('vtrackora_user', JSON.stringify(userData.user));
+    localStorage.setItem('vtrackora_token', userData.token);
+    localStorage.setItem('vtrackora_role', userData.user.role);
     showSuccess(`Welcome back, ${userData.user.name}!`);
   };
 
   const handleLogout = () => {
     authService.logout();
     setUser(null);
-    localStorage.removeItem('transitops_role');
+    localStorage.removeItem('vtrackora_role');
     showSuccess('Logged out successfully');
   };
 

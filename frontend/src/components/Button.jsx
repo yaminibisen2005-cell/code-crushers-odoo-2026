@@ -15,11 +15,11 @@ export const Button = ({
   const baseStyle = "inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98] cursor-pointer";
   
   const variants = {
-    primary: "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500 shadow-sm",
-    secondary: "bg-slate-100 hover:bg-slate-200 text-slate-800 focus:ring-slate-300",
-    outline: "border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 focus:ring-slate-400",
-    danger: "bg-red-600 hover:bg-red-700 text-white focus:ring-red-500 shadow-sm",
-    success: "bg-emerald-600 hover:bg-emerald-700 text-white focus:ring-emerald-500 shadow-sm",
+    primary: "bg-gradient-to-r from-[#0F6FFF] via-[#27D7FF] to-[#A8F542] text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200",
+    secondary: "bg-white border-2 border-[#0F6FFF] text-[#0F6FFF] hover:bg-slate-50 focus:ring-[#0F6FFF]",
+    outline: "border-2 border-slate-300 bg-white hover:bg-slate-50 text-slate-700 focus:ring-slate-400",
+    danger: "bg-[#EF4444] hover:bg-red-600 text-white focus:ring-red-500 shadow-sm",
+    success: "bg-[#22C55E] hover:bg-green-600 text-white focus:ring-green-500 shadow-sm",
   };
 
   const sizes = {

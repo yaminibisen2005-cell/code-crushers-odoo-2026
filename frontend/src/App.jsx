@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider, useApp } from './context/AppContext';
 import { DashboardLayout } from './layouts/DashboardLayout';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { AppLoader } from './components/common/AppLoader';
+import { AnimatePresence } from 'framer-motion';
 
 // Pages
 import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
 import { Vehicles } from './pages/Vehicles';
 import { Drivers } from './pages/Drivers';
@@ -26,13 +29,26 @@ const AuthGuard = ({ children }) => {
   return <DashboardLayout>{children}</DashboardLayout>;
 };
 
-export default function App() {
+// App Wrapper with Loader
+const AppContent = () => {
+  const [showLoader, setShowLoader] = useState(true);
+
+  const handleLoaderComplete = () => {
+    setShowLoader(false);
+  };
+
   return (
-    <AppProvider>
-      <BrowserRouter>
+    <>
+      <AnimatePresence>
+        {showLoader && (
+          <AppLoader onComplete={handleLoaderComplete} />
+        )}
+      </AnimatePresence>
+      {!showLoader && (
         <Routes>
           {/* Public Routes */}
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* Access Denied Route */}
           <Route path="/access-denied" element={<AccessDenied />} />
@@ -122,6 +138,16 @@ export default function App() {
           {/* Fallback 404 Route */}
           <Route path="*" element={<AuthGuard><NotFound /></AuthGuard>} />
         </Routes>
+      )}
+    </>
+  );
+};
+
+export default function App() {
+  return (
+    <AppProvider>
+      <BrowserRouter>
+        <AppContent />
       </BrowserRouter>
     </AppProvider>
   );

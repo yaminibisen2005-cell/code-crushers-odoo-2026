@@ -39,28 +39,28 @@ const INITIAL_FUEL = [
 
 // Setup default localStorage keys if empty
 const initLocalStorage = () => {
-  if (!localStorage.getItem('transitops_vehicles')) {
-    localStorage.setItem('transitops_vehicles', JSON.stringify(INITIAL_VEHICLES));
+  if (!localStorage.getItem('vtrackora_vehicles')) {
+    localStorage.setItem('vtrackora_vehicles', JSON.stringify(INITIAL_VEHICLES));
   }
-  if (!localStorage.getItem('transitops_drivers')) {
-    localStorage.setItem('transitops_drivers', JSON.stringify(INITIAL_DRIVERS));
+  if (!localStorage.getItem('vtrackora_drivers')) {
+    localStorage.setItem('vtrackora_drivers', JSON.stringify(INITIAL_DRIVERS));
   }
-  if (!localStorage.getItem('transitops_trips')) {
-    localStorage.setItem('transitops_trips', JSON.stringify(INITIAL_TRIPS));
+  if (!localStorage.getItem('vtrackora_trips')) {
+    localStorage.setItem('vtrackora_trips', JSON.stringify(INITIAL_TRIPS));
   }
-  if (!localStorage.getItem('transitops_maintenance')) {
-    localStorage.setItem('transitops_maintenance', JSON.stringify(INITIAL_MAINTENANCE));
+  if (!localStorage.getItem('vtrackora_maintenance')) {
+    localStorage.setItem('vtrackora_maintenance', JSON.stringify(INITIAL_MAINTENANCE));
   }
-  if (!localStorage.getItem('transitops_fuel')) {
-    localStorage.setItem('transitops_fuel', JSON.stringify(INITIAL_FUEL));
+  if (!localStorage.getItem('vtrackora_fuel')) {
+    localStorage.setItem('vtrackora_fuel', JSON.stringify(INITIAL_FUEL));
   }
 };
 
 initLocalStorage();
 
 // Helper functions for Database interactions
-const getDb = (key) => JSON.parse(localStorage.getItem(`transitops_${key}`) || '[]');
-const saveDb = (key, data) => localStorage.setItem(`transitops_${key}`, JSON.stringify(data));
+const getDb = (key) => JSON.parse(localStorage.getItem(`vtrackora_${key}`) || '[]');
+const saveDb = (key, data) => localStorage.setItem(`vtrackora_${key}`, JSON.stringify(data));
 
 // Create Axios Mock Client using a custom Adapter
 const api = axios.create({
@@ -82,10 +82,10 @@ api.defaults.adapter = async (config) => {
   if (url.startsWith('/api/auth/login')) {
     if (method === 'post' || method === 'POST') {
       const { email, password } = parsedData;
-      if (email === 'admin@transitops.com' && password === 'admin123') {
+      if (email === 'admin@vtrackora.com' && password === 'admin123') {
         return {
           data: {
-            token: 'transitops-jwt-token-xyz',
+            token: 'vtrackora-jwt-token-xyz',
             user: { email, name: 'Alex Harrison', role: 'Operations Manager', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60' }
           },
           status: 200,
@@ -97,7 +97,7 @@ api.defaults.adapter = async (config) => {
         return Promise.reject({
           response: {
             status: 401,
-            data: { message: 'Invalid credentials. Use admin@transitops.com / admin123' }
+            data: { message: 'Invalid credentials. Use admin@vtrackora.com / admin123' }
           }
         });
       }

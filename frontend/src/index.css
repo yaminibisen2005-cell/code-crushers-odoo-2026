@@ -3,6 +3,31 @@
 
 @theme {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* VTrackora Brand Colors */
+  --color-primary: #0F6FFF;
+  --color-secondary: #0A4DB8;
+  --color-aqua: #27D7FF;
+  --color-teal: #1ED5C3;
+  --color-lime: #A8F542;
+  --color-navy: #081B33;
+  --color-background: #F7FAFC;
+  --color-sidebar: #071A2D;
+  --color-surface: #FFFFFF;
+  --color-border: #E5EEF8;
+  --color-text-primary: #12263F;
+  --color-text-secondary: #64748B;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+
+  /* Dark Mode Colors */
+  --color-dark-background: #081B33;
+  --color-dark-surface: #0F2744;
+  --color-dark-text: #FFFFFF;
+
+  /* Gradient */
+  --gradient-brand: linear-gradient(90deg, #0F6FFF 0%, #27D7FF 45%, #A8F542 100%);
 }
 
 @layer utilities {

@@ -34,22 +34,20 @@ export const DashboardLayout = ({ children }) => {
 
   const getPageTitle = () => {
     const matched = menuItems.find(item => item.path === location.pathname);
-    return matched ? matched.name : 'TransitOps';
+    return matched ? matched.name : 'VTrackora';
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex text-slate-800 font-sans">
+    <div className="min-h-screen bg-[#F7FAFC] flex text-[#12263F] font-sans">
       
       {/* ----------------- DESKTOP SIDEBAR ----------------- */}
-      <aside className="hidden lg:flex flex-col w-64 bg-slate-900 text-slate-300 shrink-0 border-r border-slate-800/80">
+      <aside className="hidden lg:flex flex-col w-64 bg-[#071A2D] text-slate-300 shrink-0 border-r border-slate-800/80">
         {/* Brand / Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-slate-800/80 gap-3 bg-slate-900/50">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-md">
-            T
-          </div>
+        <div className="h-16 flex items-center px-6 border-b border-slate-800/80 gap-3 bg-[#071A2D]/50">
+          <img src="/assets/logo/vtrackora-logo.png" alt="VTrackora" className="w-8 h-8 object-contain" />
           <div className="flex flex-col">
-            <span className="font-bold text-white tracking-wide text-base">TransitOps</span>
-            <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase">SaaS Fleet Engine</span>
+            <span className="font-bold text-white tracking-wide text-base">VTrackora</span>
+            <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase">Track • Monitor • Deliver</span>
           </div>
         </div>
 
@@ -64,12 +62,12 @@ export const DashboardLayout = ({ children }) => {
                 to={item.path}
                 className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group ${
                   isActive
-                    ? 'bg-blue-600/10 text-blue-400 border-r-2 border-blue-500 shadow-xs'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-gradient-to-r from-[#0F6FFF] via-[#27D7FF] to-[#A8F542] text-white shadow-lg hover:shadow-xl'
+                    : 'text-slate-400 hover:bg-slate-800/50 hover:text-white'
                 }`}
               >
                 <Icon className={`w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-105 ${
-                  isActive ? 'text-blue-400' : 'text-slate-400 group-hover:text-white'
+                  isActive ? 'text-white' : 'text-slate-400 group-hover:text-white'
                 }`} />
                 <span>{item.name}</span>
               </NavLink>
@@ -112,13 +110,11 @@ export const DashboardLayout = ({ children }) => {
           ></div>
           
           {/* Drawer Panel */}
-          <aside className="relative flex flex-col w-64 bg-slate-900 text-slate-300 h-full border-r border-slate-800 z-50">
-            <div className="h-16 flex items-center justify-between px-6 border-b border-slate-800 bg-slate-900">
+          <aside className="relative flex flex-col w-64 bg-[#071A2D] text-slate-300 h-full border-r border-slate-800 z-50">
+            <div className="h-16 flex items-center justify-between px-6 border-b border-slate-800 bg-[#071A2D]">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-md">
-                  T
-                </div>
-                <span className="font-bold text-white tracking-wide text-base">TransitOps</span>
+                <img src="/assets/logo/vtrackora-logo.png" alt="VTrackora" className="w-8 h-8 object-contain" />
+                <span className="font-bold text-white tracking-wide text-base">VTrackora</span>
               </div>
               <button
                 onClick={() => setMobileMenuOpen(false)}
@@ -139,11 +135,11 @@ export const DashboardLayout = ({ children }) => {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
                       isActive
-                        ? 'bg-blue-600/10 text-blue-400 border-r-2 border-blue-500'
-                        : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                        ? 'bg-gradient-to-r from-[#0F6FFF] via-[#27D7FF] to-[#A8F542] text-white shadow-lg'
+                        : 'text-slate-400 hover:bg-slate-800/50 hover:text-white'
                     }`}
                   >
-                    <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-blue-400' : 'text-slate-400'}`} />
+                    <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
                     <span>{item.name}</span>
                   </NavLink>
                 );
@@ -180,20 +176,20 @@ export const DashboardLayout = ({ children }) => {
       <div className="flex-1 flex flex-col min-w-0">
         
         {/* TOP NAVBAR */}
-        <header className="h-16 bg-white border-b border-slate-200/80 px-6 flex items-center justify-between sticky top-0 z-40 shadow-xs">
+        <header className="h-16 bg-white border-b border-[#E5EEF8] px-6 flex items-center justify-between sticky top-0 z-40 shadow-xs">
           
           {/* Left: Mobile Toggle & Page Title */}
           <div className="flex items-center gap-4">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden text-slate-600 hover:text-slate-900 p-1.5 rounded-xl hover:bg-slate-100 cursor-pointer"
+              className="lg:hidden text-[#64748B] hover:text-[#12263F] p-1.5 rounded-xl hover:bg-slate-100 cursor-pointer"
             >
               <Menu className="w-6 h-6" />
             </button>
             
             <div className="flex flex-col">
-              <h1 className="text-base font-bold text-slate-800 tracking-tight lg:text-lg">{getPageTitle()}</h1>
-              <p className="hidden md:block text-[10px] text-slate-400 font-semibold uppercase tracking-wider">
+              <h1 className="text-base font-bold text-[#12263F] tracking-tight lg:text-lg">{getPageTitle()}</h1>
+              <p className="hidden md:block text-[10px] text-[#64748B] font-semibold uppercase tracking-wider">
                 {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}
               </p>
             </div>
@@ -209,11 +205,11 @@ export const DashboardLayout = ({ children }) => {
                   setNotifDropdownOpen(!notifDropdownOpen);
                   setUserDropdownOpen(false);
                 }}
-                className="p-2 rounded-xl border border-slate-200/80 hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition-all duration-200 cursor-pointer relative"
+                className="p-2 rounded-xl border border-[#E5EEF8] hover:bg-slate-50 text-[#64748B] hover:text-[#12263F] transition-all duration-200 cursor-pointer relative"
               >
                 <Bell className="w-5 h-5" />
                 {unreadNotifsCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-orange-500 text-white font-extrabold text-[9px] w-5 h-5 rounded-full flex items-center justify-center ring-2 ring-white">
+                  <span className="absolute -top-1 -right-1 bg-[#F59E0B] text-white font-extrabold text-[9px] w-5 h-5 rounded-full flex items-center justify-center ring-2 ring-white">
                     {unreadNotifsCount}
                   </span>
                 )}
@@ -221,16 +217,16 @@ export const DashboardLayout = ({ children }) => {
 
               {/* Dropdown Box */}
               {notifDropdownOpen && (
-                <div className="absolute right-0 mt-3.5 w-80 bg-white border border-slate-100 rounded-2xl shadow-xl py-2 z-50 transform origin-top-right transition-all animate-fade-in">
-                  <div className="px-4 py-2.5 border-b border-slate-100 flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-800">System Activity</span>
+                <div className="absolute right-0 mt-3.5 w-80 bg-white border border-[#E5EEF8] rounded-2xl shadow-xl py-2 z-50 transform origin-top-right transition-all animate-fade-in">
+                  <div className="px-4 py-2.5 border-b border-[#E5EEF8] flex items-center justify-between">
+                    <span className="text-xs font-bold text-[#12263F]">System Activity</span>
                     <div className="flex gap-2">
                       <button
                         onClick={() => {
                           markAllNotificationsAsRead();
                           setNotifDropdownOpen(false);
                         }}
-                        className="text-[10px] font-bold text-blue-600 hover:text-blue-700 cursor-pointer"
+                        className="text-[10px] font-bold text-[#0F6FFF] hover:text-[#0A4DB8] cursor-pointer"
                       >
                         Read All
                       </button>
@@ -249,7 +245,7 @@ export const DashboardLayout = ({ children }) => {
                   
                   <div className="max-h-60 overflow-y-auto divide-y divide-slate-50">
                     {notifications.length === 0 ? (
-                      <div className="px-4 py-6 text-center text-xs text-slate-400">
+                      <div className="px-4 py-6 text-center text-xs text-[#64748B]">
                         No new notifications
                       </div>
                     ) : (
@@ -260,8 +256,8 @@ export const DashboardLayout = ({ children }) => {
                             !notif.read ? 'bg-blue-50/35' : ''
                           }`}
                         >
-                          <p className="text-xs text-slate-700 leading-normal">{notif.message}</p>
-                          <span className="text-[9px] text-slate-400 font-medium">{notif.time}</span>
+                          <p className="text-xs text-[#12263F] leading-normal">{notif.message}</p>
+                          <span className="text-[9px] text-[#64748B] font-medium">{notif.time}</span>
                         </div>
                       ))
                     )}
@@ -278,7 +274,7 @@ export const DashboardLayout = ({ children }) => {
                     setUserDropdownOpen(!userDropdownOpen);
                     setNotifDropdownOpen(false);
                   }}
-                  className="flex items-center gap-2 px-2.5 py-1 rounded-xl border border-slate-200/80 hover:bg-slate-50 cursor-pointer transition-all"
+                  className="flex items-center gap-2 px-2.5 py-1 rounded-xl border border-[#E5EEF8] hover:bg-slate-50 cursor-pointer transition-all"
                 >
                   <img
                     src={user.avatar}
@@ -286,31 +282,31 @@ export const DashboardLayout = ({ children }) => {
                     className="w-8 h-8 rounded-full object-cover ring-2 ring-blue-50"
                   />
                   <div className="hidden md:flex flex-col text-left min-w-0">
-                    <span className="text-xs font-bold text-slate-800 leading-none truncate">{user.name}</span>
-                    <span className="text-[9px] text-slate-500 font-medium mt-1 uppercase leading-none">{ROLE_DISPLAY_NAMES[user.role] || user.role}</span>
+                    <span className="text-xs font-bold text-[#12263F] leading-none truncate">{user.name}</span>
+                    <span className="text-[9px] text-[#64748B] font-medium mt-1 uppercase leading-none">{ROLE_DISPLAY_NAMES[user.role] || user.role}</span>
                   </div>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                  <ChevronDown className="w-3.5 h-3.5 text-[#64748B] shrink-0" />
                 </button>
 
                 {userDropdownOpen && (
-                  <div className="absolute right-0 mt-3.5 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl py-2 z-50">
-                    <div className="px-4 py-2 border-b border-slate-100 md:hidden">
-                      <p className="text-xs font-bold text-slate-800">{user.name}</p>
-                      <p className="text-[10px] text-slate-500">{ROLE_DISPLAY_NAMES[user.role] || user.role}</p>
+                  <div className="absolute right-0 mt-3.5 w-48 bg-white border border-[#E5EEF8] rounded-2xl shadow-xl py-2 z-50">
+                    <div className="px-4 py-2 border-b border-[#E5EEF8] md:hidden">
+                      <p className="text-xs font-bold text-[#12263F]">{user.name}</p>
+                      <p className="text-[10px] text-[#64748B]">{ROLE_DISPLAY_NAMES[user.role] || user.role}</p>
                     </div>
                     <button
                       onClick={() => {
                         setUserDropdownOpen(false);
                         navigate('/settings');
                       }}
-                      className="flex items-center gap-2.5 w-full px-4 py-2.5 text-xs text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer text-left"
+                      className="flex items-center gap-2.5 w-full px-4 py-2.5 text-xs text-[#12263F] hover:bg-slate-50 transition-colors cursor-pointer text-left"
                     >
-                      <SettingsIcon className="w-4 h-4 text-slate-400" />
+                      <SettingsIcon className="w-4 h-4 text-[#64748B]" />
                       Settings
                     </button>
                     <button
                       onClick={handleLogoutClick}
-                      className="flex items-center gap-2.5 w-full px-4 py-2.5 text-xs text-red-600 hover:bg-red-50 transition-colors cursor-pointer text-left"
+                      className="flex items-center gap-2.5 w-full px-4 py-2.5 text-xs text-[#EF4444] hover:bg-red-50 transition-colors cursor-pointer text-left"
                     >
                       <LogOut className="w-4 h-4" />
                       Logout

@@ -311,10 +311,10 @@ export const Drivers = () => {
           onActionClick={handleOpenAdd}
         />
       ) : (
-        <div className="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+        <div className="bg-white border border-[#E5EEF8] rounded-2xl shadow-sm overflow-hidden flex flex-col">
           <div className="overflow-x-auto w-full">
             <table className="w-full text-left text-sm text-slate-700 font-medium">
-              <thead className="bg-slate-50 border-b border-slate-100 text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <thead className="bg-[#F7FAFC] border-b border-[#E5EEF8] text-xs font-bold text-[#64748B] uppercase tracking-wider">
                 <tr>
                   <th className="px-6 py-4">Driver Name</th>
                   <th className="px-6 py-4">License No</th>
@@ -326,26 +326,26 @@ export const Drivers = () => {
                   <th className="px-6 py-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-[#E5EEF8]">
                 {paginatedDrivers.map((driver) => {
                   const expired = isLicenseExpired(driver.expiryDate);
                   return (
-                    <tr key={driver.id} className={`hover:bg-slate-50/40 transition-colors ${expired ? 'bg-red-50/10' : ''}`}>
+                    <tr key={driver.id} className={`hover:bg-[#27D7FF]/5 transition-colors ${expired ? 'bg-red-50/10' : ''}`}>
                       <td className="px-6 py-4">
                         <div className="flex flex-col">
-                          <span className="font-bold text-slate-800 tracking-tight">{driver.name}</span>
-                          <span className="text-[10px] text-slate-400 mt-0.5">UID: {driver.id}</span>
+                          <span className="font-bold text-[#12263F] tracking-tight">{driver.name}</span>
+                          <span className="text-[10px] text-[#64748B] mt-0.5">UID: {driver.id}</span>
                         </div>
                       </td>
-                      <td className="px-6 py-4 font-mono text-slate-600 text-xs">{driver.licenseNo}</td>
+                      <td className="px-6 py-4 font-mono text-[#12263F] text-xs">{driver.licenseNo}</td>
                       <td className="px-6 py-4">
-                        <span className="px-2 py-0.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold">
+                        <span className="px-2 py-0.5 rounded-lg bg-slate-100 text-[#12263F] text-xs font-bold">
                           {driver.category}
                         </span>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
-                          <span className={`font-semibold ${expired ? 'text-red-600 font-bold' : 'text-slate-600'}`}>
+                          <span className={`font-semibold ${expired ? 'text-[#EF4444] font-bold' : 'text-[#12263F]'}`}>
                             {driver.expiryDate}
                           </span>
                           {expired && (
@@ -355,22 +355,22 @@ export const Drivers = () => {
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-slate-500 text-xs">{driver.phone}</td>
+                      <td className="px-6 py-4 text-[#64748B] text-xs">{driver.phone}</td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <span className={`text-xs font-extrabold px-2 py-0.5 rounded-md ${
-                            driver.safetyScore >= 90 ? 'bg-emerald-50 text-emerald-700' :
-                            driver.safetyScore >= 80 ? 'bg-blue-50 text-blue-700' :
-                            'bg-red-50 text-red-700'
+                            driver.safetyScore >= 90 ? 'bg-[#22C55E]/10 text-[#22C55E]' :
+                            driver.safetyScore >= 80 ? 'bg-[#0F6FFF]/10 text-[#0F6FFF]' :
+                            'bg-[#EF4444]/10 text-[#EF4444]'
                           }`}>
                             {driver.safetyScore}%
                           </span>
                           <div className="w-16 bg-slate-100 rounded-full h-1.5 hidden sm:block">
                             <div 
                               className={`h-1.5 rounded-full ${
-                                driver.safetyScore >= 90 ? 'bg-emerald-500' :
-                                driver.safetyScore >= 80 ? 'bg-blue-500' :
-                                'bg-red-500'
+                                driver.safetyScore >= 90 ? 'bg-[#22C55E]' :
+                                driver.safetyScore >= 80 ? 'bg-[#0F6FFF]' :
+                                'bg-[#EF4444]'
                               }`} 
                               style={{ width: `${driver.safetyScore}%` }}
                             ></div>
@@ -384,21 +384,21 @@ export const Drivers = () => {
                         <div className="inline-flex gap-1">
                           <button
                             onClick={() => handleOpenDetail(driver)}
-                            className="p-1.5 hover:bg-slate-100 text-slate-500 hover:text-slate-800 rounded-lg cursor-pointer transition-colors"
+                            className="p-1.5 hover:bg-slate-100 text-[#64748B] hover:text-[#12263F] rounded-lg cursor-pointer transition-colors"
                             title="View Safety Sheet"
                           >
                             <Eye className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleOpenEdit(driver)}
-                            className="p-1.5 hover:bg-slate-100 text-slate-500 hover:text-blue-600 rounded-lg cursor-pointer transition-colors"
+                            className="p-1.5 hover:bg-slate-100 text-[#64748B] hover:text-[#0F6FFF] rounded-lg cursor-pointer transition-colors"
                             title="Edit Profile"
                           >
                             <Edit2 className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleOpenDelete(driver)}
-                            className="p-1.5 hover:bg-slate-100 text-slate-500 hover:text-red-600 rounded-lg cursor-pointer transition-colors"
+                            className="p-1.5 hover:bg-slate-100 text-[#64748B] hover:text-[#EF4444] rounded-lg cursor-pointer transition-colors"
                             title="Delete Record"
                             disabled={driver.status === 'On Trip'}
                           >
