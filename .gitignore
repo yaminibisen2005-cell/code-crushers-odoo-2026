@@ -1,0 +1,18 @@
+# This is a comment - Git ignores this line
+
+# Ignore a specific file
+config.env
+
+# Ignore an entire directory (and everything inside it)
+node_modules/
+dist/
+
+# Ignore all files with a specific extension (e.g., all log files)
+*.log
+
+# Ignore files in a specific folder, but NOT a subfolder (exception rule)
+logs/
+!logs/important.log
+
+# Ignore all .pdf files inside the documentation directory
+docs/**/*.pdf
