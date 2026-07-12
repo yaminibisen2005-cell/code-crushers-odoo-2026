@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AppProvider, useApp } from './context/AppContext';
-import { DashboardLayout } from './layouts/DashboardLayout';
-import { ProtectedRoute } from './components/ProtectedRoute';
-import { AppLoader } from './components/common/AppLoader';
-import { AnimatePresence } from 'framer-motion';
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AppProvider, useApp } from "./context/AppContext";
+import { DashboardLayout } from "./layouts/DashboardLayout";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 // Pages
-import { Login } from './pages/Login';
-import { Register } from './pages/Register';
-import { Dashboard } from './pages/Dashboard';
-import { Vehicles } from './pages/Vehicles';
-import { Drivers } from './pages/Drivers';
-import { Trips } from './pages/Trips';
-import { Maintenance } from './pages/Maintenance';
-import { FuelExpense } from './pages/FuelExpense';
-import { Reports } from './pages/Reports';
-import { Settings } from './pages/Settings';
-import { NotFound } from './pages/NotFound';
-import { AccessDenied } from './pages/AccessDenied';
+import { Login } from "./pages/Login";
+import { Dashboard } from "./pages/Dashboard";
+import { Vehicles } from "./pages/Vehicles";
+import { Drivers } from "./pages/Drivers";
+import { Trips } from "./pages/Trips";
+import { Maintenance } from "./pages/Maintenance";
+import { FuelExpense } from "./pages/FuelExpense";
+import { Reports } from "./pages/Reports";
+import { Settings } from "./pages/Settings";
+import { NotFound } from "./pages/NotFound";
+import { AccessDenied } from "./pages/AccessDenied";
 
 // Authentication Guard Component
 const AuthGuard = ({ children }) => {
@@ -29,26 +26,13 @@ const AuthGuard = ({ children }) => {
   return <DashboardLayout>{children}</DashboardLayout>;
 };
 
-// App Wrapper with Loader
-const AppContent = () => {
-  const [showLoader, setShowLoader] = useState(true);
-
-  const handleLoaderComplete = () => {
-    setShowLoader(false);
-  };
-
+export default function App() {
   return (
-    <>
-      <AnimatePresence>
-        {showLoader && (
-          <AppLoader onComplete={handleLoaderComplete} />
-        )}
-      </AnimatePresence>
-      {!showLoader && (
+    <AppProvider>
+      <BrowserRouter>
         <Routes>
           {/* Public Routes */}
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
 
           {/* Access Denied Route */}
           <Route path="/access-denied" element={<AccessDenied />} />
@@ -145,16 +129,6 @@ const AppContent = () => {
             }
           />
         </Routes>
-      )}
-    </>
-  );
-};
-
-export default function App() {
-  return (
-    <AppProvider>
-      <BrowserRouter>
-        <AppContent />
       </BrowserRouter>
     </AppProvider>
   );
