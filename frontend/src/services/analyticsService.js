@@ -44,7 +44,7 @@ const normalizeAnalytics = (analytics = {}) => {
 
 export const analyticsService = {
   getAnalytics: async () => {
-    const response = await api.get("/api/analytics");
+    const response = await api.get("/analytics");
     return normalizeAnalytics(response.data);
   },
 };

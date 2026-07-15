@@ -10,8 +10,14 @@ export const Login = () => {
   const { login, showError, showSuccess } = useApp();
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState('admin@vtrackora.com');
+  const [password, setPassword] = useState('password123');
+  const [selectedRole, setSelectedRole] = useState('');
+
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [rememberMe, setRememberMe] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -37,6 +43,26 @@ export const Login = () => {
       showError(error.message || "Login failed");
     } finally {
       setLoading(false);
+    }
+  };
+
+
+  const handleRoleChange = (role) => {
+    setSelectedRole(role);
+    fillDemoCredentials(role);
+  };
+  const fillDemoCredentials = (role) => {
+    const credentials = {
+      [ROLES.FLEET_MANAGER]: { email: 'admin@vtrackora.com', password: 'password123' },
+      [ROLES.DISPATCHER]: { email: 'dispatcher@vtrackora.com', password: 'password123' },
+      [ROLES.SAFETY_OFFICER]: { email: 'safety@vtrackora.com', password: 'password123' },
+      [ROLES.FINANCIAL_ANALYST]: { email: 'finance@vtrackora.com', password: 'password123' }
+    };
+    
+    const creds = credentials[role];
+    if (creds) {
+      setEmail(creds.email);
+      setPassword(creds.password);
     }
   };
 

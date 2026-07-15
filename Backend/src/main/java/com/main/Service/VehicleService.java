@@ -1,8 +1,6 @@
 package com.main.Service;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
@@ -17,56 +15,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class VehicleService {
 
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(?:\\.\\d+)?");
-
     private final VehicleRepository vehicleRepository;
-
-    private Double parseDoubleValue(Object value, Double defaultValue) {
-        if (value == null) {
-            return defaultValue;
-        }
-
-        if (value instanceof Number number) {
-            return number.doubleValue();
-        }
-
-        if (value instanceof String stringValue) {
-            String trimmed = stringValue.trim();
-            if (trimmed.isBlank()) {
-                return defaultValue;
-            }
-
-            Matcher matcher = NUMBER_PATTERN.matcher(trimmed);
-            if (matcher.find()) {
-                return Double.parseDouble(matcher.group());
-            }
-        }
-
-        return defaultValue;
-    }
 
     public Vehicle addVehicle(Vehicle vehicle) {
 
-        String registrationNumber = vehicle.getRegistrationNumber();
-        if (registrationNumber == null || registrationNumber.isBlank()) {
-            registrationNumber = vehicle.getRegistrationNo();
+        if (vehicleRepository.existsByRegistrationNumber(
+                vehicle.getRegistrationNumber())) {
+            throw new BusinessException(
+                    "Vehicle registration number already exists");
         }
 
-        if (registrationNumber == null || registrationNumber.isBlank()) {
-            throw new BusinessException("Vehicle registration number is required");
-        }
-
-        if (vehicleRepository.existsByRegistrationNumber(registrationNumber)) {
-            throw new BusinessException("Vehicle registration number already exists");
-        }
-
-        vehicle.setRegistrationNumber(registrationNumber);
-        vehicle.setCapacity(parseDoubleValue(vehicle.getCapacity(), 0.0));
-        vehicle.setOdometer(parseDoubleValue(vehicle.getOdometer(), 0.0));
-        vehicle.setCost(parseDoubleValue(vehicle.getCost(), 0.0));
-        if (vehicle.getStatus() == null) {
-            vehicle.setStatus(VehicleStatus.AVAILABLE);
-        }
+        vehicle.setStatus(VehicleStatus.AVAILABLE);
 
         return vehicleRepository.save(vehicle);
     }
@@ -85,28 +44,12 @@ public class VehicleService {
 
         Vehicle existingVehicle = getVehicleById(id);
 
-        String registrationNumber = vehicle.getRegistrationNumber();
-        if (registrationNumber == null || registrationNumber.isBlank()) {
-            registrationNumber = vehicle.getRegistrationNo();
-        }
-
-        if (registrationNumber != null && !registrationNumber.isBlank()) {
-            existingVehicle.setRegistrationNumber(registrationNumber);
-        }
+        existingVehicle.setRegistrationNumber(
+                vehicle.getRegistrationNumber());
         existingVehicle.setName(vehicle.getName());
         existingVehicle.setType(vehicle.getType());
-        if (vehicle.getCapacity() != null) {
-            existingVehicle.setCapacity(parseDoubleValue(vehicle.getCapacity(), existingVehicle.getCapacity()));
-        }
-        if (vehicle.getOdometer() != null) {
-            existingVehicle.setOdometer(parseDoubleValue(vehicle.getOdometer(), existingVehicle.getOdometer()));
-        }
-        if (vehicle.getCost() != null) {
-            existingVehicle.setCost(parseDoubleValue(vehicle.getCost(), existingVehicle.getCost()));
-        }
-        if (vehicle.getStatus() != null) {
-            existingVehicle.setStatus(vehicle.getStatus());
-        }
+        existingVehicle.setCapacity(vehicle.getCapacity());
+        existingVehicle.setOdometer(vehicle.getOdometer());
 
         return vehicleRepository.save(existingVehicle);
     }

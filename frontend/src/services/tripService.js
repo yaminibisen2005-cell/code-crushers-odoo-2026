@@ -1,54 +1,59 @@
 import api from "./api";
 
 const normalizeTripPayload = (tripData) => ({
-  ...tripData,
-  cargoWeight: Number(tripData.cargoWeight ?? 0),
-  distance: Number(tripData.distance ?? 0),
+  source: tripData.source || tripData.from,
+  destination: tripData.destination || tripData.to,
+  vehicleId: Number(tripData.vehicleId || tripData.vehicleId || 0),
+  driverId: Number(tripData.driverId || tripData.driverId || 0),
+  cargoWeight: Number(tripData.cargoWeight || tripData.cargoWeight || 0),
+  distance: Number(tripData.distance || tripData.distance || 0),
 });
 
 export const tripService = {
   getAll: async () => {
-    const response = await api.get("/api/trips");
+    const response = await api.get("/trips");
     return response.data;
   },
   getAllTrips: async () => {
     return tripService.getAll();
   },
   getById: async (id) => {
-    const response = await api.get(`/api/trips/${id}`);
+    const response = await api.get(`/trips/${id}`);
     return response.data;
   },
   create: async (tripData) => {
     const response = await api.post(
-      "/api/trips",
+      "/trips",
       normalizeTripPayload(tripData),
     );
     return response.data;
   },
   update: async (id, tripData) => {
-    const response = await api.patch(
-      `/api/trips/${id}/${tripData.status ? tripData.status.toLowerCase() : "dispatch"}`,
-    );
-    if (
-      tripData.status &&
-      !["dispatch", "complete", "cancel"].includes(
-        tripData.status.toLowerCase(),
-      )
-    ) {
-      return response.data;
+    // For status updates, use the specific backend endpoints
+    if (tripData.status) {
+      const status = tripData.status.toLowerCase();
+      if (status === 'dispatch' || status === 'dispatched') {
+        return tripService.dispatch(id);
+      } else if (status === 'complete' || status === 'completed') {
+        return tripService.complete(id);
+      } else if (status === 'cancel' || status === 'cancelled') {
+        return tripService.cancel(id);
+      }
     }
-    return response.data;
+    // For other updates, we might need a PUT endpoint, but backend doesn't have one yet
+    // So we'll just return the data as-is for now
+    return tripData;
   },
   dispatch: async (id) => {
-    const response = await api.patch(`/api/trips/${id}/dispatch`);
+    const response = await api.patch(`/trips/${id}/dispatch`);
     return response.data;
   },
   complete: async (id) => {
-    const response = await api.patch(`/api/trips/${id}/complete`);
+    const response = await api.patch(`/trips/${id}/complete`);
     return response.data;
   },
   cancel: async (id) => {
-    const response = await api.patch(`/api/trips/${id}/cancel`);
+    const response = await api.patch(`/trips/${id}/cancel`);
     return response.data;
   },
 };
