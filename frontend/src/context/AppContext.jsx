@@ -185,7 +185,7 @@ export const AppProvider = ({ children }) => {
   );
 };
 
-export const useApp = () => {
+const useApp = () => {
   const context = useContext(AppContext);
   return context ?? defaultContextValue;
 };
