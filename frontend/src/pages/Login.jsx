@@ -12,7 +12,7 @@ export const Login = () => {
   const { login, showError, showSuccess } = useApp();
   const navigate = useNavigate();
   const [email, setEmail] = useState('admin@vtrackora.com');
-  const [password, setPassword] = useState('admin123');
+  const [password, setPassword] = useState('password123');
   const [selectedRole, setSelectedRole] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -48,10 +48,10 @@ export const Login = () => {
   };
   const fillDemoCredentials = (role) => {
     const credentials = {
-      [ROLES.FLEET_MANAGER]: { email: 'admin@vtrackora.com', password: 'admin123' },
-      [ROLES.DISPATCHER]: { email: 'dispatcher@vtrackora.com', password: 'dispatcher123' },
-      [ROLES.SAFETY_OFFICER]: { email: 'safety@vtrackora.com', password: 'safety123' },
-      [ROLES.FINANCIAL_ANALYST]: { email: 'finance@vtrackora.com', password: 'finance123' }
+      [ROLES.FLEET_MANAGER]: { email: 'admin@vtrackora.com', password: 'password123' },
+      [ROLES.DISPATCHER]: { email: 'dispatcher@vtrackora.com', password: 'password123' },
+      [ROLES.SAFETY_OFFICER]: { email: 'safety@vtrackora.com', password: 'password123' },
+      [ROLES.FINANCIAL_ANALYST]: { email: 'finance@vtrackora.com', password: 'password123' }
     };
     
     const creds = credentials[role];

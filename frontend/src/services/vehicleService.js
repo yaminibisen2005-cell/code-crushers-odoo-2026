@@ -81,33 +81,33 @@ const normalizeVehicleList = (data) =>
 
 export const vehicleService = {
   getAll: async () => {
-    const response = await api.get("/api/vehicles");
+    const response = await api.get("/vehicles");
     return normalizeVehicleList(response.data);
   },
   getById: async (id) => {
-    const response = await api.get(`/api/vehicles/${id}`);
+    const response = await api.get(`/vehicles/${id}`);
     return normalizeVehicleResponse(response.data);
   },
   getAvailable: async () => {
-    const response = await api.get("/api/vehicles/available");
+    const response = await api.get("/vehicles/available");
     return normalizeVehicleList(response.data);
   },
   create: async (vehicleData) => {
     const response = await api.post(
-      "/api/vehicles",
+      "/vehicles",
       normalizeVehiclePayload(vehicleData),
     );
     return normalizeVehicleResponse(response.data);
   },
   update: async (id, vehicleData) => {
     const response = await api.put(
-      `/api/vehicles/${id}`,
+      `/vehicles/${id}`,
       normalizeVehiclePayload(vehicleData),
     );
     return normalizeVehicleResponse(response.data);
   },
   delete: async (id) => {
-    const response = await api.delete(`/api/vehicles/${id}`);
+    const response = await api.delete(`/vehicles/${id}`);
     return response.data;
   },
 };

@@ -10,7 +10,7 @@ const normalizeFuelPayload = (fuelData) => ({
 
 export const fuelService = {
   getAll: async () => {
-    const response = await api.get("/api/fuel");
+    const response = await api.get("/fuel");
     return response.data;
   },
   getAllFuelRecords: async () => {
@@ -18,14 +18,20 @@ export const fuelService = {
   },
   create: async (fuelData) => {
     const vehicleId = fuelData.vehicleId;
+    const tripId = fuelData.tripId;
+    const params = {};
+    if (tripId) {
+      params.tripId = tripId;
+    }
     const response = await api.post(
-      `/api/fuel/vehicle/${vehicleId}`,
+      `/fuel/vehicle/${vehicleId}`,
       normalizeFuelPayload(fuelData),
+      { params },
     );
     return response.data;
   },
   delete: async (id) => {
-    const response = await api.delete(`/api/fuel/${id}`);
+    const response = await api.delete(`/fuel/${id}`);
     return response.data;
   },
 };
