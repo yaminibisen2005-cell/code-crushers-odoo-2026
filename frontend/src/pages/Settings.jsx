@@ -12,7 +12,7 @@ export const Settings = () => {
   // Settings states
   const [profile, setProfile] = useState({
     name: user?.name || 'Alex Harrison',
-    email: user?.email || 'admin@vtrackora.com',
+    email: user?.email || 'admin@transitops.com',
     phone: '+1-555-0192',
     role: user?.role || 'Operations Manager'
   });

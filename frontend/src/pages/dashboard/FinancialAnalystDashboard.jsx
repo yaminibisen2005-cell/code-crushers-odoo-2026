@@ -71,7 +71,7 @@ export const FinancialAnalystDashboard = () => {
   }
 
   const { operationalCosts, fuelEfficiency } = dashboardData || {};
-  const COLORS = ['#0F6FFF', '#27D7FF', '#22C55E', '#F59E0B', '#1ED5C3'];
+  const COLORS = ['#3b82f6', '#f59e0b', '#10b981', '#ef4444', '#8b5cf6'];
 
   // Calculate total fuel costs
   const totalFuelCost = fuelData.reduce((sum, record) => sum + (record.cost || 0), 0);

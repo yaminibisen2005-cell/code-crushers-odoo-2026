@@ -18,6 +18,7 @@ const AppContext = createContext(defaultContextValue);
 
 export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
+
     try {
       const savedUser = localStorage.getItem("transitops_user");
 
@@ -30,6 +31,10 @@ export const AppProvider = ({ children }) => {
       localStorage.removeItem("transitops_user");
       return null;
     }
+
+    const savedUser = localStorage.getItem("transitops_user");
+    return savedUser ? JSON.parse(savedUser) : null;
+
   });
 
   const [toasts, setToasts] = useState([]);
@@ -108,6 +113,18 @@ export const AppProvider = ({ children }) => {
     localStorage.setItem("transitops_role", data.user.role);
 
     showSuccess(`Welcome ${data.user.name}`);
+  const handleLogin = (userData) => {
+    const normalizedUser = {
+      ...userData.user,
+      role: normalizeRole(userData.user.role),
+    };
+
+    setUser(normalizedUser);
+    localStorage.setItem("transitops_user", JSON.stringify(normalizedUser));
+    localStorage.setItem("transitops_token", userData.token);
+    localStorage.setItem("transitops_role", normalizedUser.role);
+    showSuccess(`Welcome back, ${normalizedUser.name}!`);
+
   };
 
   const logout = () => {
@@ -115,8 +132,11 @@ export const AppProvider = ({ children }) => {
 
     setUser(null);
 
+
     localStorage.removeItem("transitops_user");
     localStorage.removeItem("transitops_token");
+    localStorage.removeItem("transitops_role");
+
     localStorage.removeItem("transitops_role");
 
     showSuccess("Logged out successfully");

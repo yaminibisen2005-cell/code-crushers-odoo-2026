@@ -10,6 +10,17 @@ export const authService = {
       });
 
       const data = response.data;
+      const normalizedRole = normalizeRole(data.role);
+
+      const user = {
+        name: data.name,
+        email: data.email,
+        role: normalizedRole,
+      };
+
+      localStorage.setItem("transitops_token", data.token);
+      localStorage.setItem("transitops_user", JSON.stringify(user));
+      localStorage.setItem("transitops_role", normalizedRole);
 
       // Store token and user data (backend returns token, name, email, role)
       const user = {
@@ -23,12 +34,15 @@ export const authService = {
 
       return {
         token: data.token,
+
         user: user,
+        user,
       };
     } catch (error) {
       throw new Error(error.response?.data?.message || "Invalid credentials");
     }
   },
+
   
   register: async (userData) => {
     try {
@@ -50,9 +64,13 @@ export const authService = {
   
   getCurrentUser: () => {
     const user = localStorage.getItem('transitops_user');
+
+
+  getCurrentUser: () => {
+    const user = localStorage.getItem("transitops_user");
     return user ? JSON.parse(user) : null;
   },
-  
+
   logout: () => {
     localStorage.removeItem('transitops_user');
     localStorage.removeItem('transitops_token');
